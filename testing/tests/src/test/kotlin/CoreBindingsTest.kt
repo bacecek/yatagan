@@ -615,6 +615,312 @@ class CoreBindingsTest(
     }
 
     @Test
+    fun `type parameters and multi-bindings in kotlin`() {
+        givenPrecompiledModule(SourceSet {
+            givenKotlinSource("test.Deferred", """
+                import javax.inject.*
+                class Deferred<out T> @Inject constructor(val provider: Provider<out T>)
+            """.trimIndent())
+            givenJavaSource("test.MySpecificDeferredEvent", """
+                public interface MySpecificDeferredEvent {
+                    void onDeferredStart();
+                }
+             """.trimIndent())
+            givenJavaSource("test.DeferredDispatcher","""
+                import javax.inject.*;
+                import java.util.List;
+                public class DeferredDispatcher {
+                    @Inject
+                    public DeferredDispatcher(Provider<List<Deferred<? extends MySpecificDeferredEvent>>> events) {
+                        for (Deferred<? extends MySpecificDeferredEvent> d : events.get()) {
+                            d.getProvider().get().onDeferredStart();
+                        }
+                    }
+                }
+            """.trimIndent())
+            givenJavaSource("test.MyClass1", """
+            public class MyClass1 implements MySpecificDeferredEvent { 
+                public @javax.inject.Inject MyClass1 () {}
+                @Override public void onDeferredStart() {}     
+            }
+        """.trimIndent())
+            givenJavaSource("test.MyClass2", """
+            @javax.inject.Singleton 
+            public class MyClass2 implements MySpecificDeferredEvent { 
+                public @javax.inject.Inject MyClass2 () {} 
+                @Override public void onDeferredStart() {}
+            }
+        """.trimIndent())
+            givenJavaSource("test.MyClass3", """
+            public class MyClass3 implements MySpecificDeferredEvent { 
+                public @javax.inject.Inject MyClass3 () {}
+                @Override public void onDeferredStart() {}
+            }
+        """.trimIndent())
+            givenKotlinSource("test.MyModule", """
+                import javax.inject.Provider
+                import javax.inject.Singleton
+                import com.yandex.yatagan.Binds
+                import com.yandex.yatagan.Provides
+                import com.yandex.yatagan.Module
+                import com.yandex.yatagan.IntoList
+    
+                @Module
+                interface MyModule {
+                    @IntoList @Binds fun foo1(i: Deferred<MyClass1>): Deferred<@JvmWildcard MySpecificDeferredEvent>
+                    @IntoList @Binds fun foo2(i: Deferred<MyClass2>): Deferred<@JvmWildcard MySpecificDeferredEvent>
+                    @IntoList @Binds fun foo3(i: Deferred<MyClass3>): Deferred<@JvmWildcard MySpecificDeferredEvent>
+                    
+                    companion object {
+                        @IntoList @Provides fun foo5(p: Provider<MyClass3>): Deferred<@JvmWildcard MySpecificDeferredEvent> {
+                            return Deferred(p)
+                        }
+                    }
+                }
+            """.trimIndent())
+        })
+
+        givenJavaSource("test.MyComponent", """
+            import java.util.Collections;
+            import java.util.Collection;
+            import java.util.List;
+            import javax.inject.Provider;
+            import javax.inject.Inject;
+            import javax.inject.Singleton;
+            import com.yandex.yatagan.Component;
+    
+            @Singleton
+            @Component(modules = MyModule.class)
+            interface MyComponent {
+                DeferredDispatcher dispatcher();
+            }
+        """.trimIndent())
+
+        givenKotlinSource("test.TestCase", """
+            fun test() {
+                val c = com.yandex.yatagan.Yatagan.create(MyComponent::class.java)
+                c.dispatcher()
+            }
+        """.trimIndent())
+
+
+        compileRunAndValidate()
+    }
+
+    @Test
+    fun `type parameters and multi-bindings in mixed kotlin and java`() {
+        givenPrecompiledModule(SourceSet {
+            givenKotlinSource("test.Deferred", """
+                import javax.inject.*
+                class Deferred<out T> @Inject constructor(val provider: Provider<out T>)
+            """.trimIndent())
+            givenJavaSource("test.MySpecificDeferredEvent", """
+                public interface MySpecificDeferredEvent {
+                    void onDeferredStart();
+                }
+             """.trimIndent())
+            givenJavaSource("test.DeferredDispatcher","""
+                import javax.inject.*;
+                import java.util.List;
+                public class DeferredDispatcher {
+                    @Inject
+                    public DeferredDispatcher(Provider<List<Deferred<? extends MySpecificDeferredEvent>>> events) {
+                        for (Deferred<? extends MySpecificDeferredEvent> d : events.get()) {
+                            d.getProvider().get().onDeferredStart();
+                        }
+                    }
+                }
+            """.trimIndent())
+            givenJavaSource("test.MyClass1", """
+                public class MyClass1 implements MySpecificDeferredEvent { 
+                    public @javax.inject.Inject MyClass1 () {}
+                    @Override public void onDeferredStart() {}     
+                }
+            """.trimIndent())
+            givenJavaSource("test.MyClass2", """
+                @javax.inject.Singleton 
+                public class MyClass2 implements MySpecificDeferredEvent { 
+                    public @javax.inject.Inject MyClass2 () {} 
+                    @Override public void onDeferredStart() {}
+                }
+            """.trimIndent())
+            givenJavaSource("test.MyClass3", """
+                public class MyClass3 implements MySpecificDeferredEvent { 
+                    public @javax.inject.Inject MyClass3 () {}
+                    @Override public void onDeferredStart() {}
+                }
+            """.trimIndent())
+            givenJavaSource("test.MyClass4", """
+                public class MyClass4 implements MySpecificDeferredEvent { 
+                    public @javax.inject.Inject MyClass4 () {}
+                    @Override public void onDeferredStart() {}     
+                }
+            """.trimIndent())
+            givenJavaSource("test.MyClass5", """
+                @javax.inject.Singleton 
+                public class MyClass5 implements MySpecificDeferredEvent { 
+                    public @javax.inject.Inject MyClass5 () {} 
+                    @Override public void onDeferredStart() {}
+                }
+            """.trimIndent())
+            givenJavaSource("test.MyClass6", """
+                public class MyClass6 implements MySpecificDeferredEvent { 
+                    public @javax.inject.Inject MyClass6 () {}
+                    @Override public void onDeferredStart() {}
+                }
+            """.trimIndent())
+            givenKotlinSource("test.MyModule", """
+                import javax.inject.Provider
+                import javax.inject.Singleton
+                import com.yandex.yatagan.Binds
+                import com.yandex.yatagan.Provides
+                import com.yandex.yatagan.Module
+                import com.yandex.yatagan.IntoList
+    
+                @Module
+                interface MyModule {
+                    @IntoList @Binds fun foo1(i: Deferred<MyClass1>): Deferred<@JvmWildcard MySpecificDeferredEvent>
+                    @IntoList @Binds fun foo2(i: Deferred<MyClass2>): Deferred<@JvmWildcard MySpecificDeferredEvent>
+                    @IntoList @Binds fun foo3(i: Deferred<MyClass3>): Deferred<@JvmWildcard MySpecificDeferredEvent>
+                }
+            """.trimIndent())
+            givenJavaSource("test.MyJavaModule", """
+                import javax.inject.Provider;
+                import javax.inject.Singleton;
+                import com.yandex.yatagan.Binds;
+                import com.yandex.yatagan.Provides;
+                import com.yandex.yatagan.Module;
+                import com.yandex.yatagan.IntoList;
+                
+                @Module
+                public interface MyJavaModule {
+                    @IntoList @Binds Deferred<? extends MySpecificDeferredEvent> foo4(Deferred<MyClass4> i);
+                    @IntoList @Binds Deferred<? extends MySpecificDeferredEvent> foo5(Deferred<MyClass5> i);
+                    @IntoList @Binds Deferred<? extends MySpecificDeferredEvent> foo6(Deferred<MyClass6> i);
+                }
+            """.trimIndent())
+        })
+
+        givenJavaSource("test.MyComponent", """
+            import java.util.Collections;
+            import java.util.Collection;
+            import java.util.List;
+            import javax.inject.Provider;
+            import javax.inject.Inject;
+            import javax.inject.Singleton;
+            import com.yandex.yatagan.Component;
+    
+            @Singleton
+            @Component(modules = { MyModule.class, MyJavaModule.class })
+            interface MyComponent {
+                DeferredDispatcher dispatcher();
+            }
+        """.trimIndent())
+
+        givenKotlinSource("test.TestCase", """
+            fun test() {
+                val c = com.yandex.yatagan.Yatagan.create(MyComponent::class.java)
+                c.dispatcher()
+            }
+        """.trimIndent())
+
+
+        compileRunAndValidate()
+    }
+
+    @Test
+    fun `type parameters and multi-bindings in kotlin without out T in Deferred`() {
+        givenPrecompiledModule(SourceSet {
+            givenKotlinSource("test.Deferred", """
+                import javax.inject.*
+                class Deferred<T> @Inject constructor(val provider: Provider<T>)
+            """.trimIndent())
+            givenJavaSource("test.MySpecificDeferredEvent", """
+                public interface MySpecificDeferredEvent {
+                    void onDeferredStart();
+                }
+             """.trimIndent())
+            givenKotlinSource("test.DeferredDispatcher","""
+                import javax.inject.*
+                import java.util.List
+                class DeferredDispatcher @Inject constructor(
+                    events: Provider<List<Deferred<out MySpecificDeferredEvent>>>,
+                ) {
+                
+                    init {
+                        events.get().forEach { it.provider.get().onDeferredStart() }
+                    }
+                }
+            """.trimIndent())
+            givenJavaSource("test.MyClass1", """
+            public class MyClass1 implements MySpecificDeferredEvent { 
+                public @javax.inject.Inject MyClass1 () {}
+                @Override public void onDeferredStart() {}     
+            }
+        """.trimIndent())
+            givenJavaSource("test.MyClass2", """
+            @javax.inject.Singleton 
+            public class MyClass2 implements MySpecificDeferredEvent { 
+                public @javax.inject.Inject MyClass2 () {} 
+                @Override public void onDeferredStart() {}
+            }
+        """.trimIndent())
+            givenJavaSource("test.MyClass3", """
+            public class MyClass3 implements MySpecificDeferredEvent { 
+                public @javax.inject.Inject MyClass3 () {}
+                @Override public void onDeferredStart() {}
+            }
+        """.trimIndent())
+            givenKotlinSource("test.MyModule", """
+                import javax.inject.Provider
+                import javax.inject.Singleton
+                import com.yandex.yatagan.Binds
+                import com.yandex.yatagan.Provides
+                import com.yandex.yatagan.Module
+                import com.yandex.yatagan.IntoList
+    
+                @Module
+                interface MyModule {
+                    @IntoList @Binds fun foo1(i: Deferred<MyClass1>): Deferred<out MySpecificDeferredEvent>
+                    @IntoList @Binds fun foo2(i: Deferred<MyClass2>): Deferred<out MySpecificDeferredEvent>
+                    @IntoList @Binds fun foo3(i: Deferred<MyClass3>): Deferred<out MySpecificDeferredEvent>
+                    
+                    companion object {
+                        @IntoList @Provides fun foo5(p: Provider<MyClass3>): Deferred<out MySpecificDeferredEvent> {
+                            return Deferred(p)
+                        }
+                    }
+                }
+            """.trimIndent())
+        })
+
+        givenJavaSource("test.MyComponent", """
+            import java.util.Collections;
+            import java.util.Collection;
+            import java.util.List;
+            import javax.inject.Provider;
+            import javax.inject.Inject;
+            import javax.inject.Singleton;
+            import com.yandex.yatagan.Component;
+    
+            @Singleton
+            @Component(modules = MyModule.class)
+            interface MyComponent {
+                DeferredDispatcher dispatcher();
+            }
+        """.trimIndent())
+
+        givenKotlinSource("test.TestCase", """
+            fun test() {
+                val c = com.yandex.yatagan.Yatagan.create(MyComponent::class.java)
+                c.dispatcher()
+            }
+        """.trimIndent())
+
+        compileRunAndValidate()
+    }
+
+    @Test
     fun `type parameters and multi-bindings`() {
         givenPrecompiledModule(SourceSet {
             givenKotlinSource("test.Deferred", """

@@ -29,6 +29,7 @@ import org.junit.Assert
 import java.io.File
 import java.lang.reflect.Method
 import java.net.URLClassLoader
+import javax.tools.Diagnostic
 import kotlin.io.path.Path
 import kotlin.io.path.createDirectories
 import kotlin.io.path.createTempDirectory
@@ -63,8 +64,10 @@ abstract class CompileTestDriverBase private constructor(
             workingDir = createTempDirectory(prefix = "ytc").toFile(),
             arguments = compilation,
         )
-        check(result.success) {
-            "Pre-compilation failed, check the code"
+        check(result.success) { """
+            |Pre-compilation failed, check the code.
+            |Errors: ${result.diagnostics[Diagnostic.Kind.ERROR]?.joinToString(separator = "\n", prefix = "\n")}
+        """.trimMargin()
         }
 
         precompiledModuleOutputDirs = result.outputClasspath
