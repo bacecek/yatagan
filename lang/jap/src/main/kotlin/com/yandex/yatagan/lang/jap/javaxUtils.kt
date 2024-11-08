@@ -149,11 +149,6 @@ internal fun TypeElement.isFromKotlin(): Boolean {
     return isAnnotatedWith<Metadata>()
 }
 
-internal tailrec fun Element.isFromKotlin(): Boolean {
-    // For a random element need to find a type element it belongs to first.
-    return asTypeElementOrNull()?.isFromKotlin() ?: (enclosingElement ?: return false).isFromKotlin()
-}
-
 internal fun LexicalScope.allNonPrivateFieldsIn(element: TypeElement): Sequence<VariableElement> = sequence {
     suspend fun SequenceScope<VariableElement>.addFieldsFrom(declaration: TypeElement) {
         if (declaration == Utils.objectType) {

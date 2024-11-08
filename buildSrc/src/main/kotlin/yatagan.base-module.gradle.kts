@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
     kotlin("jvm")
 }
@@ -9,16 +7,14 @@ repositories {
     google()
 }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions {
-        freeCompilerArgs = freeCompilerArgs + listOf(
+kotlin {
+    compilerOptions {
+        freeCompilerArgs.addAll(
             "-Xjvm-default=all-compatibility",
             "-Werror",
         )
     }
-}
 
-kotlin {
     jvmToolchain {
         languageVersion.set(JavaLanguageVersion.of(8))
     }
