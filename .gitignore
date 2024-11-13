@@ -46,3 +46,6 @@
 
 # Local config files
 /local.properties
+
+# Kotlin compiler local files
+.kotlin
