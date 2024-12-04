@@ -13,10 +13,12 @@ kotlin {
             "-Xjvm-default=all",
             "-Werror"
         )
+
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11)
     }
 
     jvmToolchain {
-        languageVersion.set(JavaLanguageVersion.of(8))
+        languageVersion.set(JavaLanguageVersion.of(11))
     }
 
     sourceSets.configureEach {

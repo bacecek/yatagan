@@ -4,8 +4,8 @@
 dependencyResolutionManagement {
     versionCatalogs {
         create("libs") {
-            val kotlinVersion = "2.0.21"
-            val kspVersion = "1.0.27"
+            val kotlinVersion = "2.1.0"
+            val kspVersion = "1.0.29"
             version("kotlin", kotlinVersion)
             version("ksp", "$kotlinVersion-$kspVersion")
 
@@ -23,13 +23,13 @@ dependencyResolutionManagement {
 
             library("logicng", "org.logicng:logicng-j11:2.4.2")
 
-            val yataganDogFood = "1.2.1"
+            val yataganDogFood = "1.5.0"
             library("yataganDogFood-api", "com.yandex.yatagan", "api-compiled").version(yataganDogFood)
             library("yataganDogFood-ksp", "com.yandex.yatagan", "processor-ksp").version(yataganDogFood)
         }
 
         create("testingLibs") {
-            library("roomCompileTesting", "androidx.room:room-compiler-processing-testing:2.6.0-alpha01")
+            library("roomCompileTesting", "androidx.room:room-compiler-processing-testing:2.7.0-alpha11")
             library("junit4", "junit:junit:4.13.2")
             library("mockito-kotlin", "org.mockito.kotlin:mockito-kotlin:4.0.0")
             library("assertj", "org.assertj:assertj-core:3.23.1")
