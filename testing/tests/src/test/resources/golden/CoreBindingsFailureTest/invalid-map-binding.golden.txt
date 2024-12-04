@@ -31,29 +31,8 @@ Encountered:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 error: Mapping for `java.util.Map<java.lang.Class<?>, java.lang.String>` contains duplicates for key `java.lang.Object.class`
-NOTE: Binding with conflicting key: `explicit-absent by @binds test.TestModule::binding5(...)`
-NOTE: Binding with conflicting key: `explicit-absent by @binds test.TestModule::binding6(...)`
-Encountered:
-  in graph for root-component test.TestComponent
-  in entry-point getMap: java.util.Map<java.lang.Class<?>, java.lang.String>
-                         ^-[*1]---------------------------------------------
-  here: [1*] map-binding of java.lang.Class<?> to java.lang.String { 2 elements } assembled in graph for root-component test.TestComponent
-             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Encountered:
-  in graph for root-component test.TestComponent
-  in graph for component test.SubComponent
-  in entry-point getMap: java.util.Map<java.lang.Class<?>, java.lang.String>
-                         ^-[*1]---------------------------------------------
-  in [1*] map-binding of java.lang.Class<?> to java.lang.String { <inherited from parent component>, 1 element } assembled in graph for component test.SubComponent
-                                                                  ^-[*2]---------------------------
-  here: [2*] map-binding of java.lang.Class<?> to java.lang.String { 2 elements } assembled in graph for root-component test.TestComponent
-             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-error: Mapping for `java.util.Map<java.lang.Class<?>, java.lang.String>` contains duplicates for key `java.lang.Object.class`
 NOTE: Binding with conflicting key: `provision test.SubModule::subBinding()`
-NOTE: Binding with conflicting key: `explicit-absent by @binds test.TestModule::binding5(...)`
+NOTE: Binding with conflicting key: `explicit-absent by @binds test.TestModule::binding6(...)`
 Encountered:
   in graph for root-component test.TestComponent
   in graph for component test.SubComponent

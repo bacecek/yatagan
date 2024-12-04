@@ -19,11 +19,9 @@ import javax.annotation.processing.Generated;
 @YataganGenerated
 @Generated("com.yandex.yatagan.codegen.impl.ComponentGenerator")
 public final class Yatagan$MyComponent implements MyComponent {
-  final boolean mFeaturesFooBar = Features.fooBar();
+  final boolean mFeaturesGetFeatureC_isEnabled = Features.getFeatureC().isEnabled();
 
   private byte mFeaturesIsEnabledB;
-
-  private byte mFeaturesGetFeatureC_isEnabled;
 
   private byte mSomeClassConditions_getSomeCondition1;
 
@@ -38,6 +36,8 @@ public final class Yatagan$MyComponent implements MyComponent {
   private byte mSomeClassSomeCondition6;
 
   private byte mSomeClassConditions_getSomeCondition6;
+
+  final boolean mFeaturesFooBar = Features.fooBar();
 
   private Yatagan$MyComponent() {
   }
@@ -59,7 +59,7 @@ public final class Yatagan$MyComponent implements MyComponent {
   }
 
   Optional optOfClassA() {
-    return this.mFeaturesFooBar && this.featuresIsEnabledB() && (this.featuresGetFeatureC_isEnabled() || this.featuresIsEnabledB() || this.someClassConditions_getSomeCondition1() || this.someClassSomeCondition2() || this.someClassGetSomeCondition3() || this.someClassGetSomeCondition4() || this.someClassSomeCondition5() || this.someClassSomeCondition6() || this.someClassConditions_getSomeCondition6()) ? Optional.of(this.accessClassA()) : Optional.empty();
+    return (this.mFeaturesGetFeatureC_isEnabled || this.featuresIsEnabledB() || this.someClassConditions_getSomeCondition1() || this.someClassSomeCondition2() || this.someClassGetSomeCondition3() || this.someClassGetSomeCondition4() || this.someClassSomeCondition5() || this.someClassSomeCondition6() || this.someClassConditions_getSomeCondition6()) && this.mFeaturesFooBar && this.featuresIsEnabledB() ? Optional.of(this.accessClassA()) : Optional.empty();
   }
 
   public static AutoBuilder<Yatagan$MyComponent> autoBuilder() {
@@ -71,13 +71,6 @@ public final class Yatagan$MyComponent implements MyComponent {
       this.mFeaturesIsEnabledB = (byte) ((Features.isEnabledB()) ? 0x1 : 0x2);
     }
     return this.mFeaturesIsEnabledB == 0x1;
-  }
-
-  boolean featuresGetFeatureC_isEnabled() {
-    if (this.mFeaturesGetFeatureC_isEnabled == 0x0) {
-      this.mFeaturesGetFeatureC_isEnabled = (byte) ((Features.getFeatureC().isEnabled()) ? 0x1 : 0x2);
-    }
-    return this.mFeaturesGetFeatureC_isEnabled == 0x1;
   }
 
   boolean someClassConditions_getSomeCondition1() {

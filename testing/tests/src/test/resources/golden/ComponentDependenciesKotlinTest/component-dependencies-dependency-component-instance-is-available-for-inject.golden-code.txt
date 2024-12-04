@@ -1,32 +1,4 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Name: test/Yatagan$MyApplicationComponent.java
-package test;
-
-import com.yandex.yatagan.internal.YataganGenerated;
-import java.lang.Override;
-import java.lang.SuppressWarnings;
-import javax.annotation.processing.Generated;
-
-@SuppressWarnings({"unchecked", "rawtypes", "NullableProblems"})
-@YataganGenerated
-@Generated("com.yandex.yatagan.codegen.impl.ComponentGenerator")
-public final class Yatagan$MyApplicationComponent implements MyApplicationComponent {
-  Yatagan$MyApplicationComponent() {
-  }
-
-  public static MyApplicationComponent.Factory builder() {
-    return new ComponentFactoryImpl();
-  }
-
-  private static final class ComponentFactoryImpl implements MyApplicationComponent.Factory {
-    @Override
-    public MyApplicationComponent create() {
-      return new Yatagan$MyApplicationComponent();
-    }
-  }
-}
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Name: test/Yatagan$MyActivityComponent.java
 package test;
 
@@ -121,6 +93,34 @@ public final class Yatagan$MyActivityComponent implements MyActivityComponent {
     @Override
     public MyActivityComponent create(MyApplicationComponent app) {
       return new Yatagan$MyActivityComponent(app);
+    }
+  }
+}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Name: test/Yatagan$MyApplicationComponent.java
+package test;
+
+import com.yandex.yatagan.internal.YataganGenerated;
+import java.lang.Override;
+import java.lang.SuppressWarnings;
+import javax.annotation.processing.Generated;
+
+@SuppressWarnings({"unchecked", "rawtypes", "NullableProblems"})
+@YataganGenerated
+@Generated("com.yandex.yatagan.codegen.impl.ComponentGenerator")
+public final class Yatagan$MyApplicationComponent implements MyApplicationComponent {
+  Yatagan$MyApplicationComponent() {
+  }
+
+  public static MyApplicationComponent.Factory builder() {
+    return new ComponentFactoryImpl();
+  }
+
+  private static final class ComponentFactoryImpl implements MyApplicationComponent.Factory {
+    @Override
+    public MyApplicationComponent create() {
+      return new Yatagan$MyApplicationComponent();
     }
   }
 }

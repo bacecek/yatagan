@@ -1,87 +1,4 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Name: test/Yatagan$ComponentA.java
-package test;
-
-import com.yandex.yatagan.AutoBuilder;
-import com.yandex.yatagan.Lazy;
-import com.yandex.yatagan.internal.Checks;
-import com.yandex.yatagan.internal.ThreadAssertions;
-import com.yandex.yatagan.internal.YataganGenerated;
-import java.lang.AssertionError;
-import java.lang.Class;
-import java.lang.Object;
-import java.lang.Override;
-import java.lang.SuppressWarnings;
-import java.util.Collections;
-import javax.annotation.processing.Generated;
-import javax.inject.Provider;
-
-@SuppressWarnings({"unchecked", "rawtypes", "NullableProblems"})
-@YataganGenerated
-@Generated("com.yandex.yatagan.codegen.impl.ComponentGenerator")
-public final class Yatagan$ComponentA implements ComponentA {
-  private Object mMyClassInstance;
-
-  private Yatagan$ComponentA() {
-  }
-
-  @Override
-  public Provider<MyClass> getMy() {
-    return new ProviderImpl(this, 0);
-  }
-
-  Object switch$$access(int slot) {
-    switch(slot) {
-      case 0: return this.cacheMyClass();
-      default: throw new AssertionError();
-    }
-  }
-
-  MyClass cacheMyClass() {
-    Object local = this.mMyClassInstance;
-    if (local == null) {
-      ThreadAssertions.assertThreadAccess();
-      local = new MyClass();
-      this.mMyClassInstance = local;
-    }
-    return (MyClass) local;
-  }
-
-  public static AutoBuilder<Yatagan$ComponentA> autoBuilder() {
-    return new AutoBuilderImpl();
-  }
-
-  static final class ProviderImpl implements Lazy {
-    private final Yatagan$ComponentA mDelegate;
-
-    private final int mIndex;
-
-    ProviderImpl(Yatagan$ComponentA delegate, int index) {
-      this.mDelegate = delegate;
-      this.mIndex = index;
-    }
-
-    @Override
-    public Object get() {
-      return this.mDelegate.switch$$access(this.mIndex);
-    }
-  }
-
-  private static final class AutoBuilderImpl implements AutoBuilder<Yatagan$ComponentA> {
-    @Override
-    public final <I> AutoBuilder<Yatagan$ComponentA> provideInput(I input, Class<I> inputClass) {
-      Checks.reportUnexpectedAutoBuilderInput(input.getClass(), Collections.emptyList());
-      return this;
-    }
-
-    @Override
-    public final Yatagan$ComponentA create() {
-      return new Yatagan$ComponentA();
-    }
-  }
-}
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Name: test/Yatagan$ComponentB.java
 package test;
 
@@ -209,6 +126,89 @@ public final class Yatagan$ComponentB implements ComponentB {
     @Override
     public final Yatagan$ComponentB create() {
       return new Yatagan$ComponentB();
+    }
+  }
+}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Name: test/Yatagan$ComponentA.java
+package test;
+
+import com.yandex.yatagan.AutoBuilder;
+import com.yandex.yatagan.Lazy;
+import com.yandex.yatagan.internal.Checks;
+import com.yandex.yatagan.internal.ThreadAssertions;
+import com.yandex.yatagan.internal.YataganGenerated;
+import java.lang.AssertionError;
+import java.lang.Class;
+import java.lang.Object;
+import java.lang.Override;
+import java.lang.SuppressWarnings;
+import java.util.Collections;
+import javax.annotation.processing.Generated;
+import javax.inject.Provider;
+
+@SuppressWarnings({"unchecked", "rawtypes", "NullableProblems"})
+@YataganGenerated
+@Generated("com.yandex.yatagan.codegen.impl.ComponentGenerator")
+public final class Yatagan$ComponentA implements ComponentA {
+  private Object mMyClassInstance;
+
+  private Yatagan$ComponentA() {
+  }
+
+  @Override
+  public Provider<MyClass> getMy() {
+    return new ProviderImpl(this, 0);
+  }
+
+  Object switch$$access(int slot) {
+    switch(slot) {
+      case 0: return this.cacheMyClass();
+      default: throw new AssertionError();
+    }
+  }
+
+  MyClass cacheMyClass() {
+    Object local = this.mMyClassInstance;
+    if (local == null) {
+      ThreadAssertions.assertThreadAccess();
+      local = new MyClass();
+      this.mMyClassInstance = local;
+    }
+    return (MyClass) local;
+  }
+
+  public static AutoBuilder<Yatagan$ComponentA> autoBuilder() {
+    return new AutoBuilderImpl();
+  }
+
+  static final class ProviderImpl implements Lazy {
+    private final Yatagan$ComponentA mDelegate;
+
+    private final int mIndex;
+
+    ProviderImpl(Yatagan$ComponentA delegate, int index) {
+      this.mDelegate = delegate;
+      this.mIndex = index;
+    }
+
+    @Override
+    public Object get() {
+      return this.mDelegate.switch$$access(this.mIndex);
+    }
+  }
+
+  private static final class AutoBuilderImpl implements AutoBuilder<Yatagan$ComponentA> {
+    @Override
+    public final <I> AutoBuilder<Yatagan$ComponentA> provideInput(I input, Class<I> inputClass) {
+      Checks.reportUnexpectedAutoBuilderInput(input.getClass(), Collections.emptyList());
+      return this;
+    }
+
+    @Override
+    public final Yatagan$ComponentA create() {
+      return new Yatagan$ComponentA();
     }
   }
 }

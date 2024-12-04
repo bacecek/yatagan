@@ -56,63 +56,6 @@ public final class Yatagan$MyComponentA implements MyComponentA {
 }
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Name: test/Yatagan$MyComponentB.java
-package test;
-
-import com.yandex.yatagan.AutoBuilder;
-import com.yandex.yatagan.internal.Checks;
-import com.yandex.yatagan.internal.ThreadAssertions;
-import com.yandex.yatagan.internal.YataganGenerated;
-import java.lang.Class;
-import java.lang.Object;
-import java.lang.Override;
-import java.lang.SuppressWarnings;
-import java.util.Collections;
-import javax.annotation.processing.Generated;
-
-@SuppressWarnings({"unchecked", "rawtypes", "NullableProblems"})
-@YataganGenerated
-@Generated("com.yandex.yatagan.codegen.impl.ComponentGenerator")
-public final class Yatagan$MyComponentB implements MyComponentB {
-  private Object mClassAInstance;
-
-  private Yatagan$MyComponentB() {
-  }
-
-  @Override
-  public ClassA getA() {
-    return this.cacheClassA();
-  }
-
-  ClassA cacheClassA() {
-    Object local = this.mClassAInstance;
-    if (local == null) {
-      ThreadAssertions.assertThreadAccess();
-      local = new ClassA();
-      this.mClassAInstance = local;
-    }
-    return (ClassA) local;
-  }
-
-  public static AutoBuilder<Yatagan$MyComponentB> autoBuilder() {
-    return new AutoBuilderImpl();
-  }
-
-  private static final class AutoBuilderImpl implements AutoBuilder<Yatagan$MyComponentB> {
-    @Override
-    public final <I> AutoBuilder<Yatagan$MyComponentB> provideInput(I input, Class<I> inputClass) {
-      Checks.reportUnexpectedAutoBuilderInput(input.getClass(), Collections.emptyList());
-      return this;
-    }
-
-    @Override
-    public final Yatagan$MyComponentB create() {
-      return new Yatagan$MyComponentB();
-    }
-  }
-}
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Name: test/Yatagan$MyComponentC.java
 package test;
 
@@ -165,6 +108,63 @@ public final class Yatagan$MyComponentC implements MyComponentC {
     @Override
     public final Yatagan$MyComponentC create() {
       return new Yatagan$MyComponentC();
+    }
+  }
+}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Name: test/Yatagan$MyComponentB.java
+package test;
+
+import com.yandex.yatagan.AutoBuilder;
+import com.yandex.yatagan.internal.Checks;
+import com.yandex.yatagan.internal.ThreadAssertions;
+import com.yandex.yatagan.internal.YataganGenerated;
+import java.lang.Class;
+import java.lang.Object;
+import java.lang.Override;
+import java.lang.SuppressWarnings;
+import java.util.Collections;
+import javax.annotation.processing.Generated;
+
+@SuppressWarnings({"unchecked", "rawtypes", "NullableProblems"})
+@YataganGenerated
+@Generated("com.yandex.yatagan.codegen.impl.ComponentGenerator")
+public final class Yatagan$MyComponentB implements MyComponentB {
+  private Object mClassAInstance;
+
+  private Yatagan$MyComponentB() {
+  }
+
+  @Override
+  public ClassA getA() {
+    return this.cacheClassA();
+  }
+
+  ClassA cacheClassA() {
+    Object local = this.mClassAInstance;
+    if (local == null) {
+      ThreadAssertions.assertThreadAccess();
+      local = new ClassA();
+      this.mClassAInstance = local;
+    }
+    return (ClassA) local;
+  }
+
+  public static AutoBuilder<Yatagan$MyComponentB> autoBuilder() {
+    return new AutoBuilderImpl();
+  }
+
+  private static final class AutoBuilderImpl implements AutoBuilder<Yatagan$MyComponentB> {
+    @Override
+    public final <I> AutoBuilder<Yatagan$MyComponentB> provideInput(I input, Class<I> inputClass) {
+      Checks.reportUnexpectedAutoBuilderInput(input.getClass(), Collections.emptyList());
+      return this;
+    }
+
+    @Override
+    public final Yatagan$MyComponentB create() {
+      return new Yatagan$MyComponentB();
     }
   }
 }

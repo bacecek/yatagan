@@ -1,58 +1,4 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Name: test/Yatagan$TestPhoneComponent.java
-package test;
-
-import com.yandex.yatagan.AutoBuilder;
-import com.yandex.yatagan.Optional;
-import com.yandex.yatagan.internal.Checks;
-import com.yandex.yatagan.internal.YataganGenerated;
-import java.lang.Class;
-import java.lang.Override;
-import java.lang.SuppressWarnings;
-import java.util.Collections;
-import javax.annotation.processing.Generated;
-
-@SuppressWarnings({"unchecked", "rawtypes", "NullableProblems"})
-@YataganGenerated
-@Generated("com.yandex.yatagan.codegen.impl.ComponentGenerator")
-public final class Yatagan$TestPhoneComponent implements TestPhoneComponent {
-  private Yatagan$TestPhoneComponent() {
-  }
-
-  @Override
-  public Optional<MyPhoneSpecificClass> getPhone() {
-    return this.optOfMyPhoneSpecificClass();
-  }
-
-  @Override
-  public Optional<MyTabletSpecificClass> getTablet() {
-    return Optional.empty();
-  }
-
-  Optional optOfMyPhoneSpecificClass() {
-    return Optional.of(new MyPhoneSpecificClass());
-  }
-
-  public static AutoBuilder<Yatagan$TestPhoneComponent> autoBuilder() {
-    return new AutoBuilderImpl();
-  }
-
-  private static final class AutoBuilderImpl implements AutoBuilder<Yatagan$TestPhoneComponent> {
-    @Override
-    public final <I> AutoBuilder<Yatagan$TestPhoneComponent> provideInput(I input,
-        Class<I> inputClass) {
-      Checks.reportUnexpectedAutoBuilderInput(input.getClass(), Collections.emptyList());
-      return this;
-    }
-
-    @Override
-    public final Yatagan$TestPhoneComponent create() {
-      return new Yatagan$TestPhoneComponent();
-    }
-  }
-}
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Name: test/Yatagan$TestTabletComponent.java
 package test;
 
@@ -102,6 +48,60 @@ public final class Yatagan$TestTabletComponent implements TestTabletComponent {
     @Override
     public final Yatagan$TestTabletComponent create() {
       return new Yatagan$TestTabletComponent();
+    }
+  }
+}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Name: test/Yatagan$TestPhoneComponent.java
+package test;
+
+import com.yandex.yatagan.AutoBuilder;
+import com.yandex.yatagan.Optional;
+import com.yandex.yatagan.internal.Checks;
+import com.yandex.yatagan.internal.YataganGenerated;
+import java.lang.Class;
+import java.lang.Override;
+import java.lang.SuppressWarnings;
+import java.util.Collections;
+import javax.annotation.processing.Generated;
+
+@SuppressWarnings({"unchecked", "rawtypes", "NullableProblems"})
+@YataganGenerated
+@Generated("com.yandex.yatagan.codegen.impl.ComponentGenerator")
+public final class Yatagan$TestPhoneComponent implements TestPhoneComponent {
+  private Yatagan$TestPhoneComponent() {
+  }
+
+  @Override
+  public Optional<MyPhoneSpecificClass> getPhone() {
+    return this.optOfMyPhoneSpecificClass();
+  }
+
+  @Override
+  public Optional<MyTabletSpecificClass> getTablet() {
+    return Optional.empty();
+  }
+
+  Optional optOfMyPhoneSpecificClass() {
+    return Optional.of(new MyPhoneSpecificClass());
+  }
+
+  public static AutoBuilder<Yatagan$TestPhoneComponent> autoBuilder() {
+    return new AutoBuilderImpl();
+  }
+
+  private static final class AutoBuilderImpl implements AutoBuilder<Yatagan$TestPhoneComponent> {
+    @Override
+    public final <I> AutoBuilder<Yatagan$TestPhoneComponent> provideInput(I input,
+        Class<I> inputClass) {
+      Checks.reportUnexpectedAutoBuilderInput(input.getClass(), Collections.emptyList());
+      return this;
+    }
+
+    @Override
+    public final Yatagan$TestPhoneComponent create() {
+      return new Yatagan$TestPhoneComponent();
     }
   }
 }
