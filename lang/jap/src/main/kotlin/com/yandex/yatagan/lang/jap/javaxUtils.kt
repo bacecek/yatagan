@@ -151,7 +151,12 @@ internal fun TypeElement.isFromKotlin(): Boolean {
 
 internal tailrec fun Element.isFromKotlin(): Boolean {
     // For a random element need to find a type element it belongs to first.
-    return asTypeElementOrNull()?.isFromKotlin() ?: (enclosingElement ?: return false).isFromKotlin()
+    val typeElement = asTypeElementOrNull()
+    if (typeElement != null) {
+        return typeElement.isFromKotlin()
+    }
+    val enclosing = enclosingElement ?: return false
+    return enclosing.isFromKotlin()
 }
 
 internal fun LexicalScope.allNonPrivateFieldsIn(element: TypeElement): Sequence<VariableElement> = sequence {
