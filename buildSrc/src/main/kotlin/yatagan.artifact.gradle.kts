@@ -3,8 +3,8 @@ import org.gradle.kotlin.dsl.registering
 
 plugins {
     id("yatagan.base-module")
-    id("org.jetbrains.dokka")
-    id("org.jetbrains.dokka-javadoc")
+//    id("org.jetbrains.dokka")
+//    id("org.jetbrains.dokka-javadoc")
     `maven-publish`
     signing
 }
@@ -42,25 +42,25 @@ java {
 
 val artifactName = path.trim(':').replace(':', '-')
 
-dokka {
-    moduleName.set(artifactName)
-}
+//dokka {
+//    moduleName.set(artifactName)
+//}
 
-val javadocJar by tasks.registering(Jar::class) {
-    archiveClassifier.set("javadoc")
-    from(tasks.dokkaGeneratePublicationJavadoc.map { it.outputDirectory })
-    dependsOn(tasks.dokkaGeneratePublicationJavadoc)
-}
+//val javadocJar by tasks.registering(Jar::class) {
+//    archiveClassifier.set("javadoc")
+//    from(tasks.dokkaGeneratePublicationJavadoc.map { it.outputDirectory })
+//    dependsOn(tasks.dokkaGeneratePublicationJavadoc)
+//}
 
-artifacts {
-    add(configurations.archives.name, javadocJar)
-}
+//artifacts {
+//    add(configurations.archives.name, javadocJar)
+//}
 
 publishing {
     publications {
         create<MavenPublication>("main") {
             from(components["java"])
-            artifact(javadocJar)
+//            artifact(javadocJar)
 
             this.version = yataganVersion
             this.groupId = "com.yandex.yatagan"

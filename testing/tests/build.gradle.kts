@@ -48,6 +48,9 @@ dependencies {
     // Third-party test dependencies
     implementation(libs.testing.junit4)
     implementation(libs.testing.roomCompileTesting)
+    implementation(libs.ksp.commondeps)
+    implementation(libs.ksp.processing)
+    implementation(libs.ksp.embeddable)
 
     // Base test dependencies
     implementation(project(":processor:common"))

@@ -88,7 +88,9 @@ internal class RtModelFactoryImpl(
         private val upperBounds = arrayOf(upperBound)
         override fun getUpperBounds() = upperBounds
         override fun getLowerBounds() = emptyArray<ReflectType>()
-        override fun toString() = "? extends $upperBound"
+        override fun toString(): String {
+            return "? extends $upperBound"
+        }
     }
 
     private class ParameterizedTypeImpl(

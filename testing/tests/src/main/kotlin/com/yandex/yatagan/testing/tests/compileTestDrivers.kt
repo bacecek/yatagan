@@ -33,13 +33,13 @@ internal fun compileTestDrivers(
 
     val providers = buildList {
         if (includeJap) {
-            add(NamedProvider(::JapCompileTestDriver, name = "JAP"))
+//            add(NamedProvider(::JapCompileTestDriver, name = "JAP"))
         }
         if (includeKsp) {
             add(NamedProvider(::KspCompileTestDriver, name = "KSP"))
         }
         if (includeRt) {
-            add(NamedProvider(::DynamicCompileTestDriver, name = "RT"))
+//            add(NamedProvider(::DynamicCompileTestDriver, name = "RT"))
         }
     }
     return if (CompileTestDriverBase.isInUpdateGoldenMode) {

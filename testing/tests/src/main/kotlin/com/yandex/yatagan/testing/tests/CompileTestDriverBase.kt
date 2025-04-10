@@ -209,6 +209,8 @@ abstract class CompileTestDriverBase private constructor(
         javacArguments = listOf(
             "-Xdiags:verbose",
             "-parameters",
+//            "-source", "11",
+//            "-target", "11",
         ),
         kotlincArguments = listOf(
             "-opt-in=com.yandex.yatagan.ConditionsApi",
@@ -216,6 +218,9 @@ abstract class CompileTestDriverBase private constructor(
             "-P", "plugin:org.jetbrains.kotlin.kapt3:correctErrorTypes=true",
             "-jvm-target=11",
             "-java-parameters",
+//            "-Xjvm-default=all",
+//            "-api-version=1.9",
+//            "-language-version=1.9",
         ),
         processorOptions = options,
     )

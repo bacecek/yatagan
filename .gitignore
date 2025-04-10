@@ -50,3 +50,5 @@
 
 # Koltin compiler internals
 .kotlin/
+
+.DS_Store

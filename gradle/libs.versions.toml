@@ -1,16 +1,16 @@
 [versions]
 
 # Kotlin version used to build Yatagan
-kotlin = "2.0.21"
+kotlin = "2.1.10"
 # Must be in sync with 'kotlin'. Asserted in buildscript
-ksp = "2.0.21-1.0.28"
+ksp = "2.1.10-1.0.29"
 # Must be compatible with 'kotlin'
 dokka = "2.0.0"
 
 dagger = "2.51.1"
 
 # Yatagan version used to build Yatagan
-yataganDogFood = "1.5.0"
+yataganDogFood = "1.6.0"
 
 [libraries]
 kotlin-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
@@ -25,6 +25,9 @@ kotlin-koverGradle = "org.jetbrains.kotlinx:kover-gradle-plugin:0.8.0"
 
 ksp-api = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "ksp" }
 ksp-gradle = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
+ksp-commondeps = { module = "com.google.devtools.ksp:symbol-processing-common-deps", version.ref = "ksp" }
+ksp-processing = { module = "com.google.devtools.ksp:symbol-processing", version.ref = "ksp" }
+ksp-embeddable = { module = "com.google.devtools.ksp:symbol-processing-aa-embeddable", version.ref = "ksp" }
 
 autoCommon = "com.google.auto:auto-common:1.2.2"
 poets-java = "com.squareup:javapoet:1.13.0"
@@ -36,7 +39,7 @@ yataganDogFood-api = { module = "com.yandex.yatagan:api-compiled", version.ref =
 yataganDogFood-ksp = { module = "com.yandex.yatagan:processor-ksp", version.ref = "yataganDogFood" }
 
 # Testing libraries
-testing-roomCompileTesting = "androidx.room:room-compiler-processing-testing:2.6.0"
+testing-roomCompileTesting = "androidx.room:room-compiler-processing-testing:2.7.0"
 testing-junit4 = "junit:junit:4.13.2"
 testing-assertj = "org.assertj:assertj-core:3.26.0"
 testing-dagger-api =  { module = "com.google.dagger:dagger", version.ref = "dagger" }
